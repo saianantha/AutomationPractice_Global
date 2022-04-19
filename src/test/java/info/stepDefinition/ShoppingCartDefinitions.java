@@ -51,12 +51,13 @@ public class ShoppingCartDefinitions {
 	@Then("cart total is matching with {string}")
 	public void cart_total_is_matching_with(String string) {
 		totalSummaryPrice = shoppingCartSteps.totalProductsAmountSummary();
-		if (totalEachItemSumPrice == totalSummaryPrice) {
+		Double compare = (double) Double.compare(totalEachItemSumPrice, totalSummaryPrice); 
+		if (compare == 0) {
 			customEnsure.customLogWithoutScreenShot("Total amount matched with value" + totalSummaryPrice, "Pass");
 		} else {
 			customEnsure.customLogWithoutScreenShot(
 					"Mismatch in values expected::" + totalSummaryPrice + "Actual value::" + totalEachItemSumPrice,
-					"Pass");
+					"Fail");
 		}
 
 	}
